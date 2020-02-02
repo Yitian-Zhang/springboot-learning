@@ -42,5 +42,7 @@
         文件上传页面: /file/upload/page</a><br>
     <a href="http://localhost:8080/interceptor/start">
         拦截器欢迎页面：/interceptor/start></a><br>
+    <a href="http://localhost:8080/international/page">
+        国际化页面：/international/page</a><br>
 </body>
 </html>
