@@ -1,12 +1,13 @@
 package cn.zyt.springbootlearning.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author yitian
  */
-@RestController
+@Controller
 @RequestMapping("/web")
 public class IndexController {
 

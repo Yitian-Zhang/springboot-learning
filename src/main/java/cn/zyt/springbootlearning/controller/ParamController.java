@@ -1,6 +1,6 @@
 package cn.zyt.springbootlearning.controller;
 
-import cn.zyt.springbootlearning.config.UserValidator;
+import cn.zyt.springbootlearning.component.UserValidator;
 import cn.zyt.springbootlearning.domain.User;
 import cn.zyt.springbootlearning.domain.ValidatorPojo;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -96,7 +96,7 @@ public class ParamController {
     }
 
     /**
-     * 自定义参数格式传递：cn.zyt.springbootlearning.config.StringToUserConverter
+     * 自定义参数格式传递：cn.zyt.springbootlearning.component.StringToUserConverter
      */
     @GetMapping("/converter")
     @ResponseBody

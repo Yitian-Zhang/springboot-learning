@@ -38,5 +38,9 @@
         DataModel请求2: /data/modelMap?id=1</a><br>
     <a href="http://localhost:8080/data/modelandview?id=1">
         DataModel请求3: /data/modelandview?id=1</a><br>
+    <a href="http://localhost:8080/file/upload/page">
+        文件上传页面: /file/upload/page</a><br>
+    <a href="http://localhost:8080/interceptor/start">
+        拦截器欢迎页面：/interceptor/start></a><br>
 </body>
 </html>

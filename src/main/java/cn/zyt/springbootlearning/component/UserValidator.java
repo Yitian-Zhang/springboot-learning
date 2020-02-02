@@ -1,4 +1,4 @@
-package cn.zyt.springbootlearning.config;
+package cn.zyt.springbootlearning.component;
 
 import cn.zyt.springbootlearning.domain.User;
 import org.springframework.util.StringUtils;
