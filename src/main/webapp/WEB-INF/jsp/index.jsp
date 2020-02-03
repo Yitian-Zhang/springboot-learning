@@ -44,5 +44,15 @@
         拦截器欢迎页面：/interceptor/start></a><br>
     <a href="http://localhost:8080/international/page">
         国际化页面：/international/page</a><br>
+    <a href="http://localhost:8080/redirect/redirect1ById?userName=reUserName1&sex=1&note=none">
+        使用ID重定向1：/redirect/redirect1ById?userName=reUserName1&sex=1&note=none</a><br>
+    <a href="http://localhost:8080/redirect/redirect2ById?userName=reUserName1&sex=1&note=none">
+        使用ID重定向2：/redirect/redirect2ById?userName=reUserName1&sex=1&note=none</a><br>
+    <a href="http://localhost:8080/redirect/redirectUser1?userName=reUserName1&sex=1&note=none">
+        带参数重定向1：/redirect/redirectUser1?userName=reUserName1&sex=1&note=none</a><br>
+    <a href="http://localhost:8080/redirect/redirectUser2?userName=reUserName1&sex=1&note=none">
+        带参数重定向2：/redirect/redirectUser2?userName=reUserName2&sex=1&note=none</a><br>
+    <a href="http://localhost:8080/session/page">
+        Session页面：/session/page</a><br>
 </body>
 </html>
