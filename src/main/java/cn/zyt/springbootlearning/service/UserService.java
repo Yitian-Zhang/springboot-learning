@@ -21,4 +21,10 @@ public interface UserService {
     List<User> getUserList();
 
     List<User> searchUser(Long userId, String userName);
+
+    List<User> findUsers(String userName, Integer start, Integer limit);
+
+    int updateUserById(User user);
+
+    int deleteUser(Long id);
 }

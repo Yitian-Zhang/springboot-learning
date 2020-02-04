@@ -56,4 +56,26 @@ public class UserServiceImpl implements UserService {
     public List<User> searchUser(Long userId, String userName) {
         return userMapper.searchUser(userId, userName);
     }
+
+    /**
+     * select * from t_user where user_name="userName" limit start, limit;
+     * @param userName 查询用户名
+     * @param start 查询起始位置，默认为0
+     * @param limit 查询条数限制
+     * @return 查询结果集合
+     */
+    @Override
+    public List<User> findUsers(String userName, Integer start, Integer limit) {
+        return userMapper.findUsers(userName, start, limit);
+    }
+
+    @Override
+    public int updateUserById(User user) {
+        return userMapper.updateUserById(user);
+    }
+
+    @Override
+    public int deleteUser(Long id) {
+        return userMapper.deleteUser(id);
+    }
 }

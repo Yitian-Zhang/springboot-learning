@@ -54,5 +54,7 @@
         带参数重定向2：/redirect/redirectUser2?userName=reUserName2&sex=1&note=none</a><br>
     <a href="http://localhost:8080/session/page">
         Session页面：/session/page</a><br>
+    <a href="http://localhost:8080/restful/page">
+        RESTful页面：/restful/page</a><br>
 </body>
 </html>

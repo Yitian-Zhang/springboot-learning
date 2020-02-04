@@ -21,4 +21,16 @@
     <select id="searchUser" resultType="cn.zyt.springbootlearning.domain.User">
         select * from t_user where id = #{userId} or user_name = #{userName}
     </select>
+
+    <select id="findUsers" resultType="cn.zyt.springbootlearning.domain.User">
+        select * from t_user where user_name=#{userName} limit #{start}, #{limit}
+    </select>
+
+    <update id="updateUserById" parameterType="cn.zyt.springbootlearning.domain.User">
+        update t_user set user_name=#{userName}, sex=#{sex}, note=#{note} where id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="long">
+        delete from t_user where id=#{id}
+    </delete>
 </mapper>
