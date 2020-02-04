@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    <H1>本项目中包含的测试页面：</H1><br>
+    <H1>本项目中包含的Spring MVC测试页面：</H1><br>
     <a href="http://localhost:8080/user/userList">UserList页面：/user/userList</a><br>
     <a href="http://localhost:8080/user/register">InsertUser页面：/user/register</a><br>
     <a href="http://localhost:8080/param/no/annotation?intVal=10&longVal=200">

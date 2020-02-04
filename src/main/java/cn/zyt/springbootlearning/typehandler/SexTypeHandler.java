@@ -11,6 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author yitian
+ */
 // 声明JDBCType为整型
 @MappedJdbcTypes(JdbcType.INTEGER)
 // 声明JavaType为SexEnum
