@@ -33,7 +33,6 @@
                 });
             });
 
-
             $("#getUser").click(function () {
                $.get("./user/1", function (result, status) {
                    if (result == null) {

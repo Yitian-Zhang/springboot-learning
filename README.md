@@ -142,4 +142,14 @@ cn.zyt.springbootlearning.controller.SessionController
 WEB-INF/jsp/session.jsp
 WEB-INF/jsp/sessionDetail.jsp
 ```
+13.Spring Boot中实现RESTful风格接口
+```$xslt
+# REST控制器，配合userMapper和userService的更新使用
+cn.zyt.springbootlearning.controller.RestController
+# View Objects
+cn.zyt.springbootlearning.vo.UserVO
+cn.zyt.springbootlearning.vo.ResultVO
+# RESTful风格页面，其中包含POST创建用户资源，GET请求用户资源，PUT更新用户资源，DELETE删除用户资源的操作
+WEB-INF/jsp/restful.jsp
+``` 
 
