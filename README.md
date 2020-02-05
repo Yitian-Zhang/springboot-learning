@@ -155,4 +155,13 @@ cn.zyt.springbootlearning.vo.ResultVO
 # RESTful风格页面，其中包含POST创建用户资源，GET请求用户资源，PUT更新用户资源，DELETE删除用户资源的操作
 WEB-INF/jsp/restful.jsp
 ``` 
+14.详细使用MyBatis（1），主要包括MyBatis注解的使用和Provider的使用
+```
+# 对Mapper进行测试的Controller
+cn.zyt.springbootlearning.controller.MapperTestController
+# 下面三个文件为更新后的文件
+cn.zyt.springbootlearning.dao.UserMapper
+cn.zyt.springbootlearning.provider.UserProvider
+WEB-INF/jsp/index.jsp
+```
 

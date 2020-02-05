@@ -4,6 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+    <!--
+    说明：
+    该文件为mybatis的配置模板文件，目前没有启用，若需启用则需要在application.properties文中指定如下的配置：
+    mybatis.config-location=classpath:properties/mybatis-config.xml，并将该文件的名称改为mybatis-config.xml。
+    -->
+
     <!-- 外部属性设置 -->
     <properties>
         <property name="driver" value="driver"/>

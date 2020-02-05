@@ -1,6 +1,8 @@
 package cn.zyt.springbootlearning.dao;
 
 import cn.zyt.springbootlearning.domain.User;
+import cn.zyt.springbootlearning.provider.UserProvider;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,4 +24,35 @@ public interface UserMapper {
     int updateUserById(User user);
 
     int deleteUser(Long id);
+
+    @Insert("insert into t_user (user_name, sex, note) values (#{userName}, #{sex}, #{note})")
+    int insertUserAnnotation(User user);
+
+    @InsertProvider(type = UserProvider.class, method = "insertUser")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insertUserProvider(User user);
+
+    @Select("select * from t_user where id = #{id}")
+    User getUserByIdAnnotation(Long id);
+
+    @Select("select * from t_user where id = #{id} and user_name = #{userName}")
+    User searchUserAnnotation(@Param("id") Long userId, @Param("userName") String userName);
+
+    @SelectProvider(type = UserProvider.class, method = "getUser")
+    User getUserUsingProvider(Long id);
+
+    @SelectProvider(type = UserProvider.class, method = "getUserList")
+    List<User> getUserListAnnotation();
+
+    @Update("update t_user set user_name=#{userName}, sex=#{sex}, note=#{note} where id=#{id}")
+    int updateUserAnnotation(User user);
+
+    @UpdateProvider(type = UserProvider.class, method = "updateUser")
+    int updateUserProvider(User user);
+
+    @Delete("delete from t_user where id=#{id}")
+    int deleteUserAnnotation(Long id);
+
+    @DeleteProvider(type = UserProvider.class, method = "deleteUser")
+    int deleteUserProvider(Long id);
 }
