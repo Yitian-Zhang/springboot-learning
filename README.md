@@ -12,6 +12,9 @@
 1. 项目启动类：cn.zyt.springbootlearning.SpringbootLearningApplication
 2. 项目主页地址：http://localhost:8080/web/index（该页面中包含下述各种功能的请求连接以供测试）
 3. 项目配置文件：application.properties
+4. MyBatis示例配置文件：properties/mybatis-config.xml，目前由于mybatis的配置较为简单，
+因此使用在application.properties配置文件进行设置的方式，如果MyBatis的配置复杂，
+则可以在application.properties文中指定mybatis-config.xml配置文件的目录并在该文件中进行MyBatis的详细配置。
 
 ### 该项目的整体结构
 ```$xslt

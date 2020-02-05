@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 外部属性设置 -->
+    <properties>
+        <property name="driver" value="driver"/>
+        <property name="url" value="url"/>
+        <property name="username" value="username"/>
+        <property name="password" value="password"/>
+    </properties>
+
+    <!-- MyBatis的完整settings设置，根据需要进行配置，无需全部配置 -->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="multipleResultSetEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25"/>
+        <setting name="defaultFetchSize" value="100"/>
+        <setting name="safeRowRoundsEnabled" value="false"/>
+        <setting name="mapUndersocreToCamelCase" value="true"/>
+        <setting name="localCacheScope" value="SESSION"/>
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+    
+    <!-- 设置MyBatis的类型别名，可以替代类的全限定名进行使用 -->
+    <typeAliases>
+        <typeAlias type="cn.zyt.springbootlearning.domain.User" alias="User"/>
+        <typeAlias type="cn.zyt.springbootlearning.domain.Node" alias="Node"/>
+        <typeAlias type="AliasName" alias="ClassName"/>
+        <!-- 为指定package下的所有类设置别名，别名默认为类名的首字母小写，同样可以使用@Alias("")注解的方式为类设置别名 -->
+        <package name="cn.zyt.springbootlearning.domain"/>
+    </typeAliases>
+    
+    <!-- 类型处理器配置-->
+    <typeHandlers>
+        <typeHandler handler="cn.zyt.springbootlearning.typehandler.SexTypeHandler"/>
+        <!-- 让MyBatis自动去指定的package下查找对应的TypeHandler -->
+        <package name="cn.zyt.springbootlearning.typehandler"/>
+    </typeHandlers>
+
+    <!-- 环境设置 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <!-- {username:root} 若username未设置则为属性设置默认值为root -->
+                <property name="username" value="${username:root}"/>
+                <property name="password" value="${password}"/>
+                <!-- 如果数据源使用POOLED类型，则还可以设置如下属性（非所有） -->
+                <property name="poolMaximumActiveConnections" value=""/>
+                <property name="poolMaximumIdleConnections" value=""/>
+                <property name="poolMaximumCheckoutTime" value=""/>
+                <property name="poolTimeToWait" value=""/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 设置数据库厂商标识，MyBatis可以根据不同的数据库厂商执行不同的语句 -->
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="SQL" value="sqlServer"/>
+        <property name="DB2" value="db2"/>
+        <property name="Oracle" value="oracle"/>
+    </databaseIdProvider>
+
+    <!-- 映射器配置：告诉MyBatis去哪里找mapper.xml映射文件 -->
+    <mappers>
+        <!-- 使用相对于类路径的资源引用 -->
+        <mapper resource="mapper/userMapper.xml"/>
+        <!-- 使用映射器接口实现类的完全限定类名 -->
+        <mapper class="cn.zyt.springbootlearning.dao.UserMapper"/>
+        <!-- 将package内的映射器接口实现全部注册为映射器 -->
+        <package name="cn.zyt.springbootlearning.dao"/>
+    </mappers>
+    
+    
+</configuration>
