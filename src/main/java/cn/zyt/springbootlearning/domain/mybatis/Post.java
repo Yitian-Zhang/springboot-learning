@@ -11,7 +11,7 @@ public class Post {
     private Author author;
     private List<Comment> comments;
     private List<Tag> tags;
-    private Integer draft;
+    private Integer draftStatus;
     private String content;
 
     public Post() {
@@ -25,7 +25,7 @@ public class Post {
                 ", author=" + author +
                 ", comments=" + comments +
                 ", tags=" + tags +
-                ", draft=" + draft +
+                ", draft=" + draftStatus +
                 ", content='" + content + '\'' +
                 '}';
     }

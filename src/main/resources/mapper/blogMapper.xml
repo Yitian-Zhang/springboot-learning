@@ -21,9 +21,9 @@
             <id property="id" column="post_id"/>
             <result property="subject" column="post_subject"/>
             <result property="content" column="post_content"/>
-            <result property="draft" column="draft_id"/>
+            <result property="draftStatus" column="post_draft_status"/>
             <association property="author" javaType="cn.zyt.springbootlearning.domain.mybatis.Author">
-                <id property="id" column="author_id"/>
+                <id property="id" column="post_author_id"/>
                 <result property="userName" column="author_username"/>
                 <result property="password" column="author_password"/>
                 <result property="email" column="author_email"/>
@@ -58,8 +58,8 @@
             A.author_favourite_section,
             P.post_id,
             P.post_subject,
-            P.author_id,
-            P.draft_id,
+            P.author_id as post_author_id,
+            P.draft_status as post_draft_status,
             P.post_content,
             C.comment_id,
             C.comment_content,
