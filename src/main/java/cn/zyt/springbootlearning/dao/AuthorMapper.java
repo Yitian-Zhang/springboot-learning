@@ -1,8 +1,10 @@
 package cn.zyt.springbootlearning.dao;
 
 import cn.zyt.springbootlearning.domain.mybatis.Author;
+import cn.zyt.springbootlearning.provider.AuthorProvider;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -15,4 +17,8 @@ public interface AuthorMapper {
     @Select("SELECT * FROM tb_author WHERE author_id=#{id}")
     @ResultMap("authorMap")
     Author getAuthor(Integer id);
+
+    @SelectProvider(type = AuthorProvider.class, method = "getAuthor")
+    @ResultMap("authorMap")
+    Author getAuthorProvider(Integer id);
 }

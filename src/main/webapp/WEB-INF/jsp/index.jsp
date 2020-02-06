@@ -12,6 +12,7 @@
 </head>
 <body>
     <H1>本项目中包含的Spring MVC测试页面：</H1><br>
+    Author: yitian, GitHub: https://github.com/Yitian-Zhang/springboot-learning
     <hr/>
     <a href="http://localhost:8080/user/userList">UserList页面：/user/userList</a><br>
     <a href="http://localhost:8080/user/register">InsertUser页面：/user/register</a><br>
@@ -92,7 +93,7 @@
         MyBatis Provider测试（deleteUser）：/mapper/provider/deleteUser?id=4</a><br>
     <hr/>
     <a href="http://localhost:8080/resultmap/getAuthor?id=2">
-        使用ResultMap查找Author：resultmap/getAuthor?id=2</a><br>
+        使用ResultMap查找Author：/resultmap/getAuthor?id=2</a><br>
     <a href="http://localhost:8080/resultmap/getBlog?id=1">
         使用ResultMap查找Blog：resultmap/getBlog?id=1</a><br>
 </body>
