@@ -91,5 +91,9 @@
     <a href="http://localhost:8080/mapper/provider/deleteUser?id=4">
         MyBatis Provider测试（deleteUser）：/mapper/provider/deleteUser?id=4</a><br>
     <hr/>
+    <a href="http://localhost:8080/resultmap/getAuthor?id=2">
+        使用ResultMap查找Author：resultmap/getAuthor?id=2</a><br>
+    <a href="http://localhost:8080/resultmap/getBlog?id=1">
+        使用ResultMap查找Blog：resultmap/getBlog?id=1</a><br>
 </body>
 </html>

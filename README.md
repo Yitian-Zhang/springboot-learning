@@ -155,7 +155,9 @@ cn.zyt.springbootlearning.vo.ResultVO
 # RESTful风格页面，其中包含POST创建用户资源，GET请求用户资源，PUT更新用户资源，DELETE删除用户资源的操作
 WEB-INF/jsp/restful.jsp
 ``` 
-14.详细使用MyBatis（1），主要包括MyBatis注解的使用和Provider的使用
+14.详细使用MyBatis:
+
+(1) 主要包括MyBatis注解的使用和Provider的使用
 ```
 # 对Mapper进行测试的Controller
 cn.zyt.springbootlearning.controller.MapperTestController
@@ -163,5 +165,24 @@ cn.zyt.springbootlearning.controller.MapperTestController
 cn.zyt.springbootlearning.dao.UserMapper
 cn.zyt.springbootlearning.provider.UserProvider
 WEB-INF/jsp/index.jsp
+```
+(2) MyBatis的ResultMap详细使用：
+```
+# 相应的domain package，包括该包中的所有类
+cn.zyt.springbootlearning.domain.mybatis.*
+# Author和Blog类对应的mapper接口文件
+cn.zyt.springbootlearning.dao.AuthorMapper
+cn.zyt.springbootlearning.dao.BlogMapper
+
+# Author和Blog对应的Provider类
+cn.zyt.springbootlearning.provider.AuthorProvider
+
+# Author和Blog对应的mybatis映射文件，其中包括了resultMap的使用
+mapper/authorMapper.xml
+mapper/blogMapper.xml
+
+# 用于对Author和Blog进行测试的Controller类
+cn.zyt.springbootlearning.controller.ResultMapTestController
+
 ```
 

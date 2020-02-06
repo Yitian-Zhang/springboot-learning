@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zyt.springbootlearning.dao.BlogMapper">
+
+    <resultMap id="blogMap" type="cn.zyt.springbootlearning.domain.mybatis.Blog">
+        <constructor>
+            <idArg column="blog_id" javaType="int" name="id"/>
+        </constructor>
+        <id property="id" column="blog_id"/>
+        <result property="title" column="blog_title"/>
+        <association property="author" javaType="cn.zyt.springbootlearning.domain.mybatis.Author">
+            <id property="id" column="author_id"/>
+            <result property="userName" column="author_username"/>
+            <result property="password" column="author_password"/>
+            <result property="email" column="author_email"/>
+            <result property="bio" column="author_bio"/>
+            <result property="favouriteSection" column="author_favourite_section"/>
+        </association>
+        <collection property="posts" ofType="cn.zyt.springbootlearning.domain.mybatis.Post">
+            <id property="id" column="post_id"/>
+            <result property="subject" column="post_subject"/>
+            <result property="content" column="post_content"/>
+            <result property="draft" column="draft_id"/>
+            <association property="author" javaType="cn.zyt.springbootlearning.domain.mybatis.Author">
+                <id property="id" column="author_id"/>
+                <result property="userName" column="author_username"/>
+                <result property="password" column="author_password"/>
+                <result property="email" column="author_email"/>
+                <result property="bio" column="author_bio"/>
+                <result property="favouriteSection" column="author_favourite_section"/>
+            </association>
+            <collection property="comments" ofType="cn.zyt.springbootlearning.domain.mybatis.Comment">
+                <id property="id" column="comment_id"/>
+                <result property="content" column="comment_content"/>
+            </collection>
+            <collection property="tags" ofType="cn.zyt.springbootlearning.domain.mybatis.Tag">
+                <id property="id" column="tag_id"/>
+                <result property="content" column="tag_content"/>
+            </collection>
+<!--            <discriminator javaType="int" column="draft_id">-->
+<!--                <case value="1" resultType="cn.zyt.springbootlearning.domain.mybatis.DraftPost">-->
+<!--                    <id property="id" column="draft_id"/>-->
+<!--                </case>-->
+<!--            </discriminator>-->
+        </collection>
+    </resultMap>
+
+    <select id="getBlog" parameterType="int" resultMap="blogMap">
+        select
+            B.blog_id,
+            B.blog_title,
+            A.author_id,
+            A.author_username,
+            A.author_password,
+            A.author_email,
+            A.author_bio,
+            A.author_favourite_section,
+            P.post_id,
+            P.post_subject,
+            P.author_id,
+            P.draft_id,
+            P.post_content,
+            C.comment_id,
+            C.comment_content,
+            T.tag_id,
+            T.tag_content
+        from tb_blog B
+            left outer join tb_author A on B.author_id=A.author_id
+            left outer join tb_post P on B.blog_id=P.blog_id
+            left outer join tb_comment C on C.post_id=P.post_id
+            left outer join tb_tag T on T.post_id=P.post_id
+        where B.blog_id=#{id}
+    </select>
+
+</mapper>

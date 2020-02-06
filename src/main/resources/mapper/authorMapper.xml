@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zyt.springbootlearning.dao.AuthorMapper">
+
+    <resultMap id="authorMap" type="cn.zyt.springbootlearning.domain.mybatis.Author">
+        <id property="id" column="author_id"/>
+        <result property="userName" column="author_username"/>
+        <result property="password" column="author_password"/>
+        <result property="email" column="author_email"/>
+        <result property="bio" column="author_bio"/>
+        <result property="favouriteSection" column="author_favourite_section"/>
+    </resultMap>
+
+    <!--
+    【只使用配置文件的方式】：
+    可以使用如下的select元素，指定对应的返回ResultMap的id，然后在AuthorMap接口中声明对应的getAuthor方法，来进行映射。
+    【使用注解配合使用配置文件的方式】：
+    在不使用如下的Select元素的情况下可以使用如下方式进行：
+    1. 直接在接口方法中使用@Select注解，针对较简单的SQL语句较为适合
+    2. 使用@SelectProvider并创建相应的Provider类，实现sql语句，针对复杂的SQL场景比较适用。
+    同时以上两种注解方式中，都可以使用@ResultMap注解，指明authorMapper.xml配置文件中用于设置查询结果的ResultMap
+     -->
+    <!--
+    <select id="getAuthor" parameterType="int" resultMap="authorMap">
+        SELECT * FROM tb_author WHERE author_id=#{id}
+    </select>
+    -->
+</mapper>
