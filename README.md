@@ -215,4 +215,10 @@ cn.zyt.springbootlearning.service.impl.AsyncServiceImpl
 cn.zyt.springbootlearning.controller.AsyncController
 WEB-INF/jsp/index.jsp
 ```
-
+16.开启并使用Spring定时任务
+```$xslt
+# 在configuration中使用EnableScheduling开启定时任务，定时任务一般需要异步执行，所以设置在异步管理类中
+cn.zyt.springbootlearning.config.AsyncConfiguration
+# 具体实现的定时任务
+cn.zyt.springbootlearning.service.scheduling.SchedulingService
+```
