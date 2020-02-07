@@ -185,4 +185,18 @@ mapper/blogMapper.xml
 cn.zyt.springbootlearning.controller.ResultMapTestController
 
 ```
+(3) ResultMap中<discriminator>的使用
+```$xslt
+# 基础DOMAIN类，其中Vehcile为基类，Car，Suv和Truck继承自Vehicle
+cn.zyt.springbootlearning.domain.mybatis.discriminator.Vehicle
+cn.zyt.springbootlearning.domain.mybatis.discriminator.Car extend Vehicle
+cn.zyt.springbootlearning.domain.mybatis.discriminator.Suv extend Vehicle
+cn.zyt.springbootlearning.domain.mybatis.discriminator.Truck extend Vehicle
+# MyBatis配置文件，其中定义了resultmap并使用discriminator。根据vehicle_type查询字段判断，
+vehicle_type=1则映射为Car对象，=2则映射为Suv对象，=3则映射为Truck对象，否则将查询结果映射为Vehicle基类对象
+mapper/vehicleMapper.xml
+cn.zyt.springbootlearning.dao.VehicleMapper
+# 进行测试的控制类
+cn.zyt.springbootlearning.controller.ResultMapTestController
+```
 

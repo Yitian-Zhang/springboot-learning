@@ -95,6 +95,20 @@
     <a href="http://localhost:8080/resultmap/getAuthor?id=2">
         使用ResultMap查找Author：/resultmap/getAuthor?id=2</a><br>
     <a href="http://localhost:8080/resultmap/getBlog?id=1">
-        使用ResultMap查找Blog：resultmap/getBlog?id=1</a><br>
+        使用ResultMap查找Blog：/resultmap/getBlog?id=1</a><br>
+    <hr/>
+    <a href="http://localhost:8080/resultmap/getVehicle?id=1">
+        使用ResultMap查找Vehicle1：/resultmap/getVehicle?id=1</a><br>
+    <a href="http://localhost:8080/resultmap/getVehicle?id=2">
+        使用ResultMap查找Vehicle2：/resultmap/getVehicle?id=2</a><br>
+    <a href="http://localhost:8080/resultmap/getVehicle?id=3">
+        使用ResultMap查找Vehicle3：/resultmap/getVehicle?id=3</a><br>
+    <a href="http://localhost:8080/resultmap/getVehicle?id=4">
+        使用ResultMap查找Vehicle4：/resultmap/getVehicle?id=4</a><br>
+    <a href="http://localhost:8080/resultmap/getVehicleList">
+        使用ResultMap查找VehicleList：/resultmap/getVehicleList</a><br>
+    <hr/>
+
+
 </body>
 </html>

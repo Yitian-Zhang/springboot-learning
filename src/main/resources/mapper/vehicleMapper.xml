@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zyt.springbootlearning.dao.VehicleMapper">
+
+    <resultMap id="vehicleMap" type="cn.zyt.springbootlearning.domain.mybatis.discriminator.Vehicle">
+        <id property="id" column="id"/>
+        <result property="brand" column="brand"/>
+        <result property="color" column="color"/>
+        <result property="productDate" column="product_date"/>
+        <result property="vehicleType" column="vehicle_type"/>
+
+        <discriminator javaType="int" column="vehicle_type">
+            <case value="1" resultType="cn.zyt.springbootlearning.domain.mybatis.discriminator.Car">
+                <result property="doorCount" column="door_count"/>
+            </case>
+            <case value="2" resultType="cn.zyt.springbootlearning.domain.mybatis.discriminator.Suv">
+                <result property="allWheelDriver" column="all_wheel_driver"/>
+            </case>
+            <case value="3" resultType="cn.zyt.springbootlearning.domain.mybatis.discriminator.Truck">
+                <result property="boxSize" column="box_size"/>
+                <result property="capacity" column="capacity"/>
+            </case>
+        </discriminator>
+    </resultMap>
+
+</mapper>
