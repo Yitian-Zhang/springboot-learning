@@ -3,6 +3,7 @@ package cn.zyt.springbootlearning.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
@@ -13,7 +14,8 @@ import java.util.concurrent.Executor;
  * @author yitian
  */
 @Configuration
-@EnableAsync // 开启Spring异步线程池可用，配合使用@Async注解驱动Spring使用异步操作
+@EnableAsync        // 开启Spring异步线程池可用，配合使用@Async注解驱动Spring使用异步操作
+@EnableScheduling   // 开启Spring定时任务
 public class AsyncConfiguration implements AsyncConfigurer {
 
     /**
