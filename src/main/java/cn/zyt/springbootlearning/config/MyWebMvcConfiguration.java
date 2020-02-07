@@ -14,6 +14,11 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
+/**
+ * Spring MVC配置类，配置自定义拦截器和国际化
+ *
+ * @author yitian
+ */
 @Configuration
 public class MyWebMvcConfiguration implements WebMvcConfigurer {
 

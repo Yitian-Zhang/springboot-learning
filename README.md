@@ -16,7 +16,7 @@
 因此使用在application.properties配置文件进行设置的方式，如果MyBatis的配置复杂，
 则可以在application.properties文中指定mybatis-config.xml配置文件的目录并在该文件中进行MyBatis的详细配置。
 
-### 该项目的整体结构
+### 该项目的整体结构（更新中）
 ```$xslt
 .
 ├── main
@@ -183,6 +183,7 @@ mapper/blogMapper.xml
 
 # 用于对Author和Blog进行测试的Controller类
 cn.zyt.springbootlearning.controller.ResultMapTestController
+WEB-INF/jsp/index.jsp
 
 ```
 (3) ResultMap中<discriminator>的使用
@@ -198,5 +199,20 @@ mapper/vehicleMapper.xml
 cn.zyt.springbootlearning.dao.VehicleMapper
 # 进行测试的控制类
 cn.zyt.springbootlearning.controller.ResultMapTestController
+WEB-INF/jsp/index.jsp
+```
+15.开启并使用Spring异步线程池
+```$xslt
+# Spring配置类使用@EnableAsync开启异步线程池
+cn.zyt.springbootlearning.config.AsyncConfiguration
+
+# 定义包含异步方法的服务
+cn.zyt.springbootlearning.service.AsyncService
+# 在Service中使用@Async注解指明需要使用异步的方法
+cn.zyt.springbootlearning.service.impl.AsyncServiceImpl
+
+# 测试异步方法的请求和调用是否是同一个线程
+cn.zyt.springbootlearning.controller.AsyncController
+WEB-INF/jsp/index.jsp
 ```
 

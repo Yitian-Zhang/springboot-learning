@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @author yitian
  */
 @Configuration
-public class MyBatisConfig {
+public class MyBatisConfiguration {
 
 //    @Bean(name = "myAspect")
 //    public MyAspect initMyAspect() {

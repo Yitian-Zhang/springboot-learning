@@ -108,6 +108,11 @@
     <a href="http://localhost:8080/resultmap/getVehicleList">
         使用ResultMap查找VehicleList：/resultmap/getVehicleList</a><br>
     <hr/>
+    <a href="http://localhost:8080/thread/async">
+        Spring异步方法生成报表（观察后台输出）：/thread/async</a><br>
+    <a href="http://localhost:8080/thread/sync">
+        Spring同步方法生成报表（观察后台输出）：/thread/sync</a><br>
+    <hr/>
 
 
 </body>
