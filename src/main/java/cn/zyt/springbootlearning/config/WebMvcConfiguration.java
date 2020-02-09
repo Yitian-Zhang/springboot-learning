@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -20,7 +21,7 @@ import java.util.Locale;
  * @author yitian
  */
 @Configuration
-public class MyWebMvcConfiguration implements WebMvcConfigurer {
+public class WebMvcConfiguration implements WebMvcConfigurer {
 
     /**
      * 国际化参数拦截器
@@ -79,4 +80,9 @@ public class MyWebMvcConfiguration implements WebMvcConfigurer {
         return localeChangeInterceptor;
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        // 为登出设置相应页面
+        registry.addViewController("logoutResult").setViewName("logoutResult");
+    }
 }

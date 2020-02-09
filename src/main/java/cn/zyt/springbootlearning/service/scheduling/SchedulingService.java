@@ -25,9 +25,11 @@ import org.springframework.stereotype.Service;
  *          # 第几个
  *          , 列举多项
  *
+ * 注：暂时将@Service注解注释掉，在需要使用定时器功能时开启即可
+ *
  * @author yitian
  */
-@Service
+//@Service
 public class SchedulingService {
 
     // 定义计数器

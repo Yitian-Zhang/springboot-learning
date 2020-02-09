@@ -113,7 +113,13 @@
     <a href="http://localhost:8080/thread/sync">
         Spring同步方法生成报表（观察后台输出）：/thread/sync</a><br>
     <hr/>
-
+    <a href="http://localhost:8080/actuator">
+        HTTP监测页面：/actuator</a><br>
+    <a href="http://localhost:8080/app/shutdown">
+        HTTP关闭服务：/app/shutdown</a><br>
+    <a href="http://localhost:8080/app/logout">
+        Spring Security退出登录：/app/logout</a><br>
+    <hr/>
 
 </body>
 </html>
