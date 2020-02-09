@@ -222,3 +222,44 @@ cn.zyt.springbootlearning.config.AsyncConfiguration
 # 具体实现的定时任务
 cn.zyt.springbootlearning.service.scheduling.SchedulingService
 ```
+17.开启Spring Security进行用户登录登出验证
+```$xslt
+# 加入Spring security依赖
+pom.xml
+# 配置用户名和角色已经验证的请求
+cn.zyt.springbootlearning.config.WebSecurityConfiguration
+# 配置登出的controller，映射登出页面
+cn.zyt.springbootlearning.config.WebMvcConfiguration
+cn.zyt.springbootlearning.controller.ApplicationController
+# logout为登出页面，logoutResult为登出成功页面
+WEB-INF/jsp/logout.jsp
+WEB-INF/jsp/logoutResult.jsp
+```
+18.开启HTTP Actuator端点监测
+```$xslt
+# 引入Actuator依赖
+pom.xml
+# 加入端点配置
+application.properties
+# 配置访问权限和路径
+cn.zyt.springbootlearning.config.WebSecurityConfiguration
+```
+(1) 开启shutdown端点
+```$xslt
+# 关闭服务页面controller
+cn.zyt.springbootlearning.controller.ApplicationController
+# 关闭页面
+WEB-INF/jsp/shutdown.jsp
+```
+(2) 自定义监测端点
+```$xslt
+cn.zyt.springbootlearning.component.endpoints.DataBaseConnectionEndpoint
+```
+(3) 自定义health监测指标
+```$xslt
+# 开启health监测指标配置
+application.properties
+# 自定义www health指标
+cn.zyt.springbootlearning.component.indicator.WwwHealthIndicator
+
+```
