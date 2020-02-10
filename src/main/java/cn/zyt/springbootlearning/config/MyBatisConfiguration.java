@@ -1,7 +1,5 @@
 package cn.zyt.springbootlearning.config;
 
-import cn.zyt.springbootlearning.aspect.MyAspect;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**

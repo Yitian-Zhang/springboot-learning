@@ -7,6 +7,7 @@
 4. EasyUI
 5. Spring MVC
 6. Maven
+7. Spring Security
 
 ### 项目使用
 1. 项目启动类：cn.zyt.springbootlearning.SpringbootLearningApplication
@@ -60,7 +61,7 @@
 # 该package中定义了AOP中相关的拦截器，启动器，动态代理等
 cn.zyt.springbootlearning.aop.*
 # 自定义实现的切面，包括切点、各类通知和连接点概念
-cn.zyt.springbootlearning.aspect.MyAspect
+MyAspect
 # 将自定义切面注入IoC容器的配置类
 cn.zyt.springbootlearning.config.MyBatisConfig
 # 对切点中的方法进行增强的用户验证类
@@ -262,4 +263,13 @@ application.properties
 # 自定义www health指标
 cn.zyt.springbootlearning.component.indicator.WwwHealthIndicator
 
+```
+19.理解Spring-data-redis项目中spring整合redis的过程
+```$xslt
+# 引入redis和jedis客户端依赖
+pom.xml
+# redisconfiguration类
+cn.zyt.springbootlearning.config.RedisConfiguration
+# 相关的Test类
+cn.zyt.springbootlearning.config.RedisConfigurationTest
 ```

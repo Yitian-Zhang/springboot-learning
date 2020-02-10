@@ -1,4 +1,4 @@
-package cn.zyt.springbootlearning.aspect;
+package cn.zyt.springbootlearning.aop.aspect;
 
 import cn.zyt.springbootlearning.domain.User;
 import cn.zyt.springbootlearning.service.UserValidator;
