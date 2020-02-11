@@ -120,6 +120,15 @@
     <a href="http://localhost:8080/app/logout">
         Spring Security退出登录：/app/logout</a><br>
     <hr/>
-
+    <a href="http://localhost:8080/redis/string">
+        Redis的String操作：/redis/string</a><br>
+    <a href="http://localhost:8080/redis/hash">
+        Redis的Hash操作：/redis/hash</a><br>
+    <a href="http://localhost:8080/redis/list">
+        Redis的List操作：/redis/list</a><br>
+    <a href="http://localhost:8080/redis/set">
+        Redis的Set操作：/redis/set</a><br>
+    <a href="http://localhost:8080/redis/zset">
+        Redis的zSet操作：/redis/zset</a><br>
 </body>
 </html>

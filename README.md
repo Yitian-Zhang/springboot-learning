@@ -273,3 +273,14 @@ cn.zyt.springbootlearning.config.RedisConfiguration
 # 相关的Test类
 cn.zyt.springbootlearning.config.RedisConfigurationTest
 ```
+20.Spring Boot整合Redis已经RedisTemplate操作Redis基本数据类型示例
+```
+# Redis连接池配置文件
+application.properties
+# SpringRedis配置类，设置Redis序列化器
+cn.zyt.springbootlearning.config.SpringRedisConfiguration
+# 使用RedisTemplate操作Redis基本数据结构示例，包括String,hash,list,set,zset
+cn.zyt.springbootlearning.controller.RedisController
+# 相关的请求路径
+WEB-INF/jsp/index.jsp
+```

@@ -22,13 +22,13 @@ public class RedisConfigurationTest {
     /**
      * 使用SessionCallback接口，在让RedisTemplate进行回调，通过他们可以在同一条连接下执行多个Redis命令
      */
-    private void useSessionCallback(RedisTemplate redisTemplate) {
-        redisTemplate.execute((RedisOperations ro) -> {
-            ro.opsForValue().set("key1", "value1");
-            ro.opsForHash().put("hash", "field", "hvalue");
-            return null;
-        });
-    }
+//    private void useSessionCallback(RedisTemplate redisTemplate) {
+//        redisTemplate.execute((RedisOperations ro) -> {
+//            ro.opsForValue().set("key1", "value1");
+//            ro.opsForHash().put("hash", "field", "hvalue");
+//            return null;
+//        });
+//    }
 
     /**
      * 连接成功的Dedis设置

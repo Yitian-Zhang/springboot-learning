@@ -44,6 +44,18 @@ public class CommonResult<T> {
         this.data = data;
     }
 
+    public static CommonResult error() {
+        return new CommonResult(false, 201, "操作失败");
+    }
+
+    public static CommonResult error(String msgInfo) {
+        return new CommonResult(false, 500, msgInfo);
+    }
+
+    public static CommonResult success() {
+        return new CommonResult(true, 200, "操作成功");
+    }
+
     @Override
     public String toString() {
         return "CommonResult{" +
