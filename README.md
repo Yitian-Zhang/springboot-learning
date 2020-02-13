@@ -284,3 +284,24 @@ cn.zyt.springbootlearning.controller.RedisController
 # 相关的请求路径
 WEB-INF/jsp/index.jsp
 ```
+21.Redis中中其他功能的使用：事务处理、Redis pipeline、Redis运行lua脚本
+```
+# 该controller暂时无测试URL
+cn.zyt.springbootlearning.controller.RedisMultiController
+```
+22.Spring Boot开启Redis Cache
+```
+# 配置Redis缓存管理器
+application.properties
+# 使用cacheEnabled注解使用Spring缓存注解
+cn.zyt.springbootlearning.config.SpringRedisConfiguration
+# 测试逻辑service类，缓存注解在impl类中
+cn.zyt.springbootlearning.service.UserCacheService
+cn.zyt.springbootlearning.service.impl.UserCacheServiceImpl
+# 测试controller类
+cn.zyt.springbootlearning.controller.UserCacheController
+# 测试URL
+WEB-INF/jsp/index.jsp
+# 自定义缓存管理器
+cn.zyt.springbootlearning.config.SpringRedisConfiguration
+```

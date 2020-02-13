@@ -130,5 +130,18 @@
         Redis的Set操作：/redis/set</a><br>
     <a href="http://localhost:8080/redis/zset">
         Redis的zSet操作：/redis/zset</a><br>
+    <hr/>
+    <h3>Spring Redis Cache</h3><br>
+    <a href="http://localhost:8080/user/cache/getUser?id=1">
+        GetUser：/user/cache/getUser?id=1</a><br>
+    <a href="http://localhost:8080/user/cache/insertUser?userName=yitian_cache&sex=1&note=none">
+        InsertUser：/user/cache/insertUser?userName=yitian_cache&sex=1&note=none</a><br>
+    <a href="http://localhost:8080/user/cache/findUsers?userName=yitian">
+        FindUsers：/user/cache/findUsers?userName=yitian</a><br>
+    <a href="http://localhost:8080/user/cache/deleteUser?id=26">
+        DeleteUser：/user/cache/deleteUser?id=26</a><br>
+    <a href="http://localhost:8080/user/cache/updateUserName?id=24&userName=yitian_new">
+        UpdateUserName：/user/cache/updateUserName?id=24&userName=yitian_new</a><br>
+    <hr/>
 </body>
 </html>
