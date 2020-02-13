@@ -4,10 +4,14 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @Alias(value = "user")
-public class User {
+public class User implements Serializable {
+
+    // 开启Spring Redis Cache时，加入序列化
+    private static final long serialVersionUID = -4947062488310146862L;
 
     private Long id;
 

@@ -55,4 +55,7 @@ public interface UserMapper {
 
     @DeleteProvider(type = UserProvider.class, method = "deleteUser")
     int deleteUserProvider(Long id);
+
+    @Select("select * from t_user where user_name = #{userName}")
+    List<User> getUsersByName(@Param("userName") String userName);
 }
