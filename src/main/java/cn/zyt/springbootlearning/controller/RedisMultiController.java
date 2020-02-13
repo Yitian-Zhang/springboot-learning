@@ -4,11 +4,14 @@ import cn.zyt.springbootlearning.vo.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,6 +92,58 @@ public class RedisMultiController {
         Long end = System.currentTimeMillis();
         System.out.println("10000次写操作，耗时： " + (end - start) + "毫秒");
         return new CommonResult(true, "操作成功");
+    }
+
+
+    /**
+     * Redis中使用Lua脚本
+     * Redis使用两种方式运行脚本：
+     * 一种是直接发送lua脚本到Redis服务器去执行，另一种是先吧lua发送给Redis，Redis会对Lua脚本进行缓存，然后返回一个SHA1的32为编码，
+     * 之后只需要发送SHA1和相关参数给Redis即可执行脚本。为的是避免lua脚本网络传输过程中的延迟，提高redis性能。
+     */
+    @GetMapping("/lua1")
+    @ResponseBody
+    public CommonResult redisLuaScript() {
+        // 设置需要运行的lua脚本
+        DefaultRedisScript<String> redisScript = new DefaultRedisScript<>();
+        redisScript.setScriptText("return 'hello Redis'");
+        // 定义脚本的返回值类型。如果没有这个定义，Spring不会返回结果
+        redisScript.setResultType(String.class);
+
+        // 执行定义的lua脚本
+        RedisSerializer<String> stringRedisSerializer = redisTemplate.getStringSerializer();
+        // 两个序列化器分别是：第一个为key序列化器，第二个是参数序列化器
+        String str = (String) redisTemplate.execute(redisScript, stringRedisSerializer, stringRedisSerializer, null);
+        return new CommonResult(true, str);
+    }
+
+    @GetMapping("/lua2")
+    public CommonResult redisLuaScript2(String key1, String key2, String value1, String value2) {
+        String lua = "redis.call('set', KEYS[1], ARGV[1]) \n"
+                + "redis.call('set', KEYS[2], ARGV[1]) \n"
+                + "local str1 = redis.call('get', KEYS[1]) \n"
+                + "local str2 = redis.call('set', KEYS[2]) \n"
+                + "if str1 == str2 then \n"
+                + "return 1 \n"
+                + "end \n"
+                + "return 0 \n";
+        System.out.println(lua);
+
+        // 设置脚本返回值类型为Long
+        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+        redisScript.setScriptText(lua);
+        redisScript.setResultType(Long.class);
+
+        // 定义key参数
+        List<String> keyList = new ArrayList<>();
+        keyList.add(key1);
+        keyList.add(key2);
+
+        // 使用StringSerializer序列化器
+        RedisSerializer<String> stringRedisSerializer = redisTemplate.getStringSerializer();
+        Long result = (Long) redisTemplate.execute(redisScript, stringRedisSerializer, stringRedisSerializer,
+                keyList, value1, value2);
+        return new CommonResult(true, "操作成功", result);
     }
 
 }
