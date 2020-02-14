@@ -20,37 +20,184 @@
 ### 该项目的整体结构（更新中）
 ```$xslt
 .
-├── main
-│   ├── java
-│   │   └── cn
-│   │       └── zyt
-│   │           └── springbootlearning
-│   │               ├── aop
-│   │               ├── aspect
-│   │               ├── component
-│   │               ├── config
-│   │               ├── controller
-│   │               ├── dao
-│   │               ├── domain
-│   │               ├── service
-│   │               │   └── impl
-│   │               ├── tools
-│   │               └── typehandler
-│   ├── resources
-│   │   ├── mapper
-│   │   ├── properties
-│   │   ├── static
-│   │   │   ├── jquery-easyui-1.7.0
-│   │   │   └── other
-│   │   └── templates
-│   └── webapp
-│       └── WEB-INF
-│           └── jsp
-└── test
-    └── java
-        └── cn
-            └── zyt
-                └── springbootlearning
+├── HELP.md
+├── README.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── springboot-learning.iml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── cn
+│   │   │       └── zyt
+│   │   │           └── springbootlearning
+│   │   │               ├── ServletInitializer.java
+│   │   │               ├── SpringbootLearningApplication.java
+│   │   │               ├── aop
+│   │   │               │   ├── Interceptor.java
+│   │   │               │   ├── Invocation.java
+│   │   │               │   ├── MyInterceptor.java
+│   │   │               │   ├── ProxyBean.java
+│   │   │               │   ├── TestProxy.java
+│   │   │               │   └── aspect
+│   │   │               │       └── MyAspect.java
+│   │   │               ├── common
+│   │   │               ├── component
+│   │   │               │   ├── MyInterceptor1.java
+│   │   │               │   ├── MyMultiInterceptor1.java
+│   │   │               │   ├── MyMultiInterceptor2.java
+│   │   │               │   ├── MyMultiInterceptor3.java
+│   │   │               │   ├── StringToUserConverter.java
+│   │   │               │   ├── UserValidator.java
+│   │   │               │   ├── endpoints
+│   │   │               │   │   └── DataBaseConnectionEndpoint.java
+│   │   │               │   └── indicator
+│   │   │               │       └── WwwHealthIndicator.java
+│   │   │               ├── config
+│   │   │               │   ├── AsyncConfiguration.java
+│   │   │               │   ├── MyBatisConfiguration.java
+│   │   │               │   ├── RedisConfiguration.java
+│   │   │               │   ├── SpringRedisConfiguration.java
+│   │   │               │   ├── WebMvcConfiguration.java
+│   │   │               │   └── WebSecurityConfiguration.java
+│   │   │               ├── controller
+│   │   │               │   ├── ApplicationController.java
+│   │   │               │   ├── AsyncController.java
+│   │   │               │   ├── DataModelController.java
+│   │   │               │   ├── FileUploadController.java
+│   │   │               │   ├── IndexController.java
+│   │   │               │   ├── InterceptorController.java
+│   │   │               │   ├── InternationalController.java
+│   │   │               │   ├── MapperTestController.java
+│   │   │               │   ├── NodeController.java
+│   │   │               │   ├── ParamController.java
+│   │   │               │   ├── ProductController.java
+│   │   │               │   ├── PurchaseController.java
+│   │   │               │   ├── PurchaseRecordController.java
+│   │   │               │   ├── RedirectController.java
+│   │   │               │   ├── RedisController.java
+│   │   │               │   ├── RedisMultiController.java
+│   │   │               │   ├── RestController.java
+│   │   │               │   ├── ResultMapTestController.java
+│   │   │               │   ├── SessionController.java
+│   │   │               │   ├── UserCacheController.java
+│   │   │               │   └── UserController.java
+│   │   │               ├── dao
+│   │   │               │   ├── AuthorMapper.java
+│   │   │               │   ├── BlogMapper.java
+│   │   │               │   ├── NodeMapper.java
+│   │   │               │   ├── ProductMapper.java
+│   │   │               │   ├── PurchaseRecordMapper.java
+│   │   │               │   ├── UserMapper.java
+│   │   │               │   └── VehicleMapper.java
+│   │   │               ├── domain
+│   │   │               │   ├── Node.java
+│   │   │               │   ├── SexEnum.java
+│   │   │               │   ├── User.java
+│   │   │               │   ├── ValidatorPojo.java
+│   │   │               │   ├── business
+│   │   │               │   │   ├── ProductPO.java
+│   │   │               │   │   └── PurchaseRecordPO.java
+│   │   │               │   └── mybatis
+│   │   │               │       ├── Author.java
+│   │   │               │       ├── Blog.java
+│   │   │               │       ├── Comment.java
+│   │   │               │       ├── DraftPost.java
+│   │   │               │       ├── Post.java
+│   │   │               │       ├── Tag.java
+│   │   │               │       └── discriminator
+│   │   │               │           ├── Car.java
+│   │   │               │           ├── Suv.java
+│   │   │               │           ├── Truck.java
+│   │   │               │           └── Vehicle.java
+│   │   │               ├── provider
+│   │   │               │   ├── AuthorProvider.java
+│   │   │               │   ├── PurchaseRecordProvider.java
+│   │   │               │   └── UserProvider.java
+│   │   │               ├── service
+│   │   │               │   ├── AsyncService.java
+│   │   │               │   ├── HelloService.java
+│   │   │               │   ├── PurchaseService.java
+│   │   │               │   ├── UserBatchService.java
+│   │   │               │   ├── UserCacheService.java
+│   │   │               │   ├── UserService.java
+│   │   │               │   ├── UserValidator.java
+│   │   │               │   ├── impl
+│   │   │               │   │   ├── AsyncServiceImpl.java
+│   │   │               │   │   ├── HelloServiceImpl.java
+│   │   │               │   │   ├── PurchaseServiceImpl.java
+│   │   │               │   │   ├── UserBatchSeviceImpl.java
+│   │   │               │   │   ├── UserCacheServiceImpl.java
+│   │   │               │   │   ├── UserServiceImpl.java
+│   │   │               │   │   └── UserValidatorImpl.java
+│   │   │               │   └── scheduling
+│   │   │               │       └── SchedulingService.java
+│   │   │               ├── tools
+│   │   │               │   └── DataSourceShow.java
+│   │   │               ├── typehandler
+│   │   │               │   └── SexTypeHandler.java
+│   │   │               └── vo
+│   │   │                   ├── CommonResult.java
+│   │   │                   ├── ResultVO.java
+│   │   │                   └── UserVO.java
+│   │   ├── resources
+│   │   │   ├── application.properties
+│   │   │   ├── mapper
+│   │   │   │   ├── authorMapper.xml
+│   │   │   │   ├── blogMapper.xml
+│   │   │   │   ├── nodeMapper.xml
+│   │   │   │   ├── productMapper.xml
+│   │   │   │   ├── purchaseRecordMapper.xml
+│   │   │   │   ├── userMapper.xml
+│   │   │   │   └── vehicleMapper.xml
+│   │   │   ├── properties
+│   │   │   │   ├── international.properties
+│   │   │   │   ├── international_en_US.properties
+│   │   │   │   ├── international_zh_CN.properties
+│   │   │   │   └── mybatis-config-template.xml
+│   │   │   └── templates
+│   │   │       └── index.html
+│   │   └── webapp
+│   │       └── WEB-INF
+│   │           └── jsp
+│   │               ├── formatter.jsp
+│   │               ├── index.jsp
+│   │               ├── international.jsp
+│   │               ├── logout.jsp
+│   │               ├── logoutResult.jsp
+│   │               ├── productList.jsp
+│   │               ├── purchase.jsp
+│   │               ├── recordList.jsp
+│   │               ├── register.jsp
+│   │               ├── restful.jsp
+│   │               ├── session.jsp
+│   │               ├── sessionDetail.jsp
+│   │               ├── shutdown.jsp
+│   │               ├── upload.jsp
+│   │               ├── userDetail.jsp
+│   │               ├── userList.jsp
+│   │               ├── validator.jsp
+│   │               └── welcome.jsp
+│   └── test
+│       └── java
+│           └── cn
+│               └── zyt
+│                   └── springbootlearning
+│                       ├── SpringbootLearningApplicationTests.java
+│                       ├── config
+│                       │   └── RedisConfigurationTest.java
+│                       ├── dao
+│                       │   ├── AuthorMapperTest.java
+│                       │   └── UserMapperTest.java
+│                       └── service
+│                           └── UserServiceTest.java
+└── upload
+    └── Xnip2020-02-01_15-18-04.jpg
+```
+如上目录结构生成的命令如下：
+```bash
+tree -L 10 -I "target|static"
 ```
 
 ### 项目实现功能
@@ -305,3 +452,71 @@ WEB-INF/jsp/index.jsp
 # 自定义缓存管理器
 cn.zyt.springbootlearning.config.SpringRedisConfiguration
 ```
+
+### 项目中包含的商品抢购实例
+
+该项目做包含的基础结构（从上述整体结构中进行提取）：
+```
+.
+├── HELP.md
+├── README.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── springboot-learning.iml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── cn
+│   │   │       └── zyt
+│   │   │           └── springbootlearning
+│   │   │               ├── ServletInitializer.java
+│   │   │               ├── SpringbootLearningApplication.java
+│   │   │               ├── ...
+│   │   │               ├── controller
+│   │   │               │   ├── ProductController.java
+│   │   │               │   ├── PurchaseController.java
+│   │   │               │   ├── PurchaseRecordController.java
+│   │   │               ├── dao
+│   │   │               │   ├── ProductMapper.java
+│   │   │               │   └── PurchaseRecordMapper.java
+│   │   │               ├── domain
+│   │   │               │   └── business
+│   │   │               │       ├── ProductPO.java
+│   │   │               │       └── PurchaseRecordPO.java
+│   │   │               ├── provider
+│   │   │               │   ├── AuthorProvider.java
+│   │   │               │   ├── PurchaseRecordProvider.java
+│   │   │               ├── service
+│   │   │               │   ├── PurchaseService.java
+│   │   │               │   └── impl
+│   │   │               │       └── PurchaseServiceImpl.java
+│   │   │               └── vo
+│   │   │                   └── CommonResult.java
+│   │   ├── resources
+│   │   │   ├── application.properties
+│   │   │   ├── mapper
+│   │   │   │   ├── productMapper.xml
+│   │   │   │   └── purchaseRecordMapper.xml
+│   │   │   ├── properties
+│   │   └── webapp
+│   │       └── WEB-INF
+│   │           └── jsp
+│   │               ├── index.jsp
+│   │               ├── productList.jsp
+│   │               ├── purchase.jsp
+│   │               └── recordList.jsp
+│   └── test
+└── upload
+```
+其中cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl类中包含了主要的抢购逻辑。
+上述的结构为基础是结构，实现了正常商品购买的业务逻辑和整体框架，在大量并发的情况中会出现超发的问题。下面通过几种不同的方法来解决该问题。
+主要包含如下的几种方法，并对相应的代码进行了改造。
+
+1.使用MySQL悲观锁
+
+2.使用乐观锁(CAS)模式
+
+3.使用改进的乐观锁模式
+
+4.使用Redis来处理大量并发情况
