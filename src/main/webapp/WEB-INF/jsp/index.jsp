@@ -247,10 +247,16 @@
         </tr>
         <tr>
             <td>
-
+                商品秒杀实例测试URL：
             </td>
             <td>
                 <hr/>
+                <a href="http://localhost:8080/purchase/page">
+                    商品抢购页面：/purchase/page</a><br/>
+                <a href="http://localhost:8080/record/list">
+                    购买记录页面：/record/list</a><br/>
+                <a href="http://localhost:8080/product/list">
+                    商品记录页面：/product/list</a><br/>
             </td>
         </tr>
         <tr>
