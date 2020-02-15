@@ -8,6 +8,8 @@
 5. Spring MVC
 6. Maven
 7. Spring Security
+8. Spring Boot+Redis
+9. Spring Redis Cache
 
 ### 项目使用
 1. 项目启动类：cn.zyt.springbootlearning.SpringbootLearningApplication
@@ -510,13 +512,60 @@ cn.zyt.springbootlearning.config.SpringRedisConfiguration
 └── upload
 ```
 其中cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl类中包含了主要的抢购逻辑。
-上述的结构为基础是结构，实现了正常商品购买的业务逻辑和整体框架，在大量并发的情况中会出现超发的问题。下面通过几种不同的方法来解决该问题。
-主要包含如下的几种方法，并对相应的代码进行了改造。
+上述的结构为基础是结构，实现了正常商品购买的业务逻辑和整体框架，在大量并发的情况中会出现超发的问题。
 
+例如在对product_id=2的商品进行2000次并发请求，购买1000件商品时，最后在数据库中得到的购买记录为1002个，
+并且商品的stock变为-2，这就是出现了超发的问题。（该记录仍保存在数据库中），此时的sql语句为：
+```
+<select id="getProduct" parameterType="long" resultMap="productMap">
+        select id, product_name, stock, price, version, note
+        from tb_product
+        where id=#{id}
+</select>
+```
+使用如下命令来测试购买完成后的时间间隔以判断性能：
+```
+select min(purchase_time), max(purchase_time) from tb_purchase_record where product_id=2;
+```
+结果为1000条记录，22s完成。
+
+下面通过几种不同的方法来解决该问题。主要包含如下的几种方法，并对相应的代码进行了改造。
 1.使用MySQL悲观锁
+```
+<!-- 出现超发现象，主要是因为共享资源（这里是stock）被多少个线程修改从而出现并发问题，
+         这里使用for update的MySQL悲观锁来解决超发问题 -->
+<select id="getProduct" parameterType="long" resultMap="productMap">
+        select id, product_name, stock, price, version, note
+        from tb_product
+        where id=#{id} for update
+</select>
+# 相应的service方法
+cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl#purchase
+```
+使用product_id=3来进行测试，stock=-1。MySQL行锁失效，暂时未找到原因。
 
 2.使用乐观锁(CAS)模式
+使用product_id=4来进行测试，存在200多个stock没有被消费，性能：41s
+```
+# 相应的方法
+cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl#purchaseCAS
+```
 
 3.使用改进的乐观锁模式
+(1) 使用时间戳限制重入的乐观锁
+product_id=5进行测试，stock并发没有问题，stock成功为0。性能：39s
+```
+# 相应的方法
+cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl#purchaseCASWithTime
+```
+
+(2) 使用限定次数重入的乐观锁
+使用product_id=6进行测试，因为次数的限制，有93个stock没有被消费，性能26s。
+将count次数增加到5进行测试，所有stock成功被消费，性能：27s。
+```
+# 相应的方法
+cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl#purchaseCASWithCount
+```
 
 4.使用Redis来处理大量并发情况
+使用product_id=7进行测试

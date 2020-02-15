@@ -20,4 +20,6 @@ public interface ProductMapper {
     @Select("select * from tb_product")
     @ResultMap("productMap")
     List<ProductPO> getProductList();
+
+    int decreaseProductCAS(@Param("id") Long productId, int quantity, @Param("version") int version);
 }

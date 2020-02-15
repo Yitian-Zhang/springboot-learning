@@ -28,4 +28,28 @@ public class PurchaseController {
         String msg = success ? "抢购成功" : "抢购失败";
         return new CommonResult(success, msg);
     }
+
+    @PostMapping("/startCAS")
+    @ResponseBody
+    public CommonResult startCAS(Long userId, Long productId, Integer quantity) {
+        boolean success = purchaseService.purchaseCAS(userId, productId, quantity);
+        String msg = success ? "抢购成功" : "抢购失败";
+        return new CommonResult(success, msg);
+    }
+
+    @PostMapping("/startCASWithTime")
+    @ResponseBody
+    public CommonResult startCASWithTime(Long userId, Long productId, Integer quantity) {
+        boolean success = purchaseService.purchaseCASWithTime(userId, productId, quantity);
+        String msg = success ? "抢购成功" : "抢购失败";
+        return new CommonResult(success, msg);
+    }
+
+    @PostMapping("/startCASWithCount")
+    @ResponseBody
+    public CommonResult startCASWithCount(Long userId, Long productId, Integer quantity) {
+        boolean success = purchaseService.purchaseCASWithCount(userId, productId, quantity);
+        String msg = success ? "抢购成功" : "抢购失败";
+        return new CommonResult(success, msg);
+    }
 }

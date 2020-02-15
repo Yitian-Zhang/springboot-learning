@@ -10,4 +10,10 @@ public interface PurchaseService {
      * @return 购买是否成功
      */
     boolean purchase(Long userId, Long productId, int quantity);
+
+    boolean purchaseCAS(Long userId, Long productId, int quantity);
+
+    boolean purchaseCASWithTime(Long userId, Long productId, int quantity);
+
+    boolean purchaseCASWithCount(Long userId, Long productId, int quantity);
 }

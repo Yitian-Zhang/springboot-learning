@@ -256,7 +256,7 @@
                 <a href="http://localhost:8080/record/list">
                     购买记录页面：/record/list</a><br/>
                 <a href="http://localhost:8080/product/list">
-                    商品记录页面：/product/list</a><br/>
+                    商品信息页面：/product/list</a><br/>
             </td>
         </tr>
         <tr>

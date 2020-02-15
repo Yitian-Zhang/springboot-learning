@@ -47,15 +47,14 @@
                 var userId = $("#userId1").val();
                 var productId = $("#productId1").val();
 
-                for(var i = 1; i <= 50000; i++) {
+                for(var i = 1; i <= 2000; i++) {
                     var params = {
                         userId: userId,
                         productId: productId,
                         quantity: 1
                     };
-
-                    $.post("./start", params, function(result) {
-                        alert(result.msgInfo);
+                    $.post("./startCASWithCount", params, function(result) {
+                        // alert(result.msgInfo);
                     });
                 }
             });
@@ -109,7 +108,7 @@
                 <button id="submit1" name="submit1">开始抢购商品</button>
             </td>
             <td>
-                注：默认50000人抢购30000个商品，每人限买1个商品。
+                注：默认2000人抢购1000个商品，每人限买1个商品。(根据数据库所在服务器性能进行调整)
             </td>
         </tr>
     </table>

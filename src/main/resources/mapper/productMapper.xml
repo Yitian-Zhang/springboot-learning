@@ -12,11 +12,12 @@
         <result property="note" column="note"/>
     </resultMap>
 
-
+    <!-- 出现超发现象，主要是因为共享资源（这里是stock）被多少个线程修改从而出现并发问题，
+         这里使用for update的MySQL悲观锁来解决超发问题 -->
     <select id="getProduct" parameterType="long" resultMap="productMap">
         select id, product_name, stock, price, version, note
         from tb_product
-        where id=#{id}
+        where id=#{id} for update
     </select>
 
     <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
@@ -30,5 +31,10 @@
     <update id="decreaseProduct">
         update tb_product set stock=stock-#{quantity}
         where id=#{id}
+    </update>
+
+    <update id="decreaseProductCAS">
+        update tb_product set stock=stock-#{quantity}, version=version+1
+        where id=#{id} and version=#{version}
     </update>
 </mapper>
