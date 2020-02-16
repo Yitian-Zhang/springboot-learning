@@ -43,6 +43,7 @@
                 var opts = $("#dg").datagrid("options");
                 opts.url = "./search";
                 $("#dg").datagrid('load', params);
+                // window.location.reload();
             });
         });
 

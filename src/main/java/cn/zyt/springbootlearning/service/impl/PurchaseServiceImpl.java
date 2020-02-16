@@ -6,15 +6,76 @@ import cn.zyt.springbootlearning.domain.business.ProductPO;
 import cn.zyt.springbootlearning.domain.business.PurchaseRecordPO;
 import cn.zyt.springbootlearning.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.Jedis;
+
+import java.util.List;
 
 /**
  * @author yitian
  */
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
+
+    /**
+     * Lua脚本，根据如下调用命令：
+     * jedis.evalsha(sha1,
+     *                     2,
+     *                     PRODUCT_SCHEDULE_SET,
+     *                     PURCHASE_PRODUCT_LIST_PREFIX,
+     *                     userId + "",
+     *                     productId + "",
+     *                     quantity + "",
+     *                     purchaseTime + "");
+     *
+     * lua中占位符与参数之间的对应关系如下：
+     * KEYS[1] -> PRODUCT_SCHEDULE_SET
+     * KEYS[2] -> PURCHASE_PRODUCT_LIST_PREFIX
+     * ARGV[1] -> userId
+     * ARGV[2] -> productId
+     * ARGV[3] -> quantity
+     * ARGV[4] -> purchaseTime
+     *
+     * Redis中数据初始化为：
+     * hmset product_7 id 7 stock 1000 price 5.00
+     */
+    private String PURCHASE_LUA_SCRIPT = "redis.call('sadd', KEYS[1], ARGV[2]) \n"  // sadd product_schedule_set 1
+            + "local productPurchaseList = KEYS[2]..ARGV[2] \n"                     // local productPurchaseList = purchase_product_list_1
+            + "local userId = ARGV[1] \n"                                           // local userId = 1
+            + "local product = 'product_'..ARGV[2] \n"                              // local product = product_1
+            + "local quantity = tonumber(ARGV[3]) \n"                               // lcoal quantity = 1
+            + "local stock = tonumber(redis.call('hget', product, 'stock')) \n"     // local stock = hget product_1 'stock'
+            + "local price = tonumber(redis.call('hget', product, 'price')) \n"     // local price = hget product_1 'price'
+            + "local purchase_time = ARGV[4] \n"                                    // local purchase_time purchaseTime
+            + "if stock < quantity then return 0 end \n"                            // if stock < quantity then return 0 end
+            + "stock = stock - quantity \n"                                         // stock = stock - quantity
+            + "redis.call('hset', product, 'stock', tostring(stock)) \n"            // hset product_1 'stock' stock
+            + "local total_price = price * quantity \n"                             // local total_price = price * quantity
+            + "local purchaseRecord = userId..','..quantity..','..total_price..','..price..','..purchase_time \n"   // local purchaseRecord = userId,quantity,total_price,price,purchase_time
+            + "redis.call('rpush', productPurchaseList, purchaseRecord) \n"         // rpush purchase_product_list_1 purchaseRecord
+            + "return 1 \n";
+
+    /**
+     * 购买记录集合前缀
+     */
+    private static final String PURCHASE_PRODUCT_LIST_PREFIX = "purchase_list_";
+
+    /**
+     * 抢购商品集合
+     */
+    private static final String PRODUCT_SCHEDULE_SET = "product_schedule_set";
+
+    /**
+     * 32位SHA1编码，第一次执行时lua脚本会被缓存到Redis
+     */
+    private String sha1 = null;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     private ProductMapper productMapper;
@@ -27,7 +88,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      * 使用MySQL for update行锁（悲观锁）
      */
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public boolean purchase(Long userId, Long productId, int quantity) {
         ProductPO product = productMapper.getProduct(productId);
         // 在这里添加 || product.getStock() <= 0的条件是无法避免超发问题的
@@ -119,6 +180,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      * 当重入次数限定为3时，有97个stock没有被消费。当count增加为5时，所有记录可以全部被消费。
      */
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public boolean purchaseCASWithCount(Long userId, Long productId, int quantity) {
         for (int i = 0; i < 5; i++) {
             ProductPO product = productMapper.getProduct(productId);
@@ -136,6 +198,61 @@ public class PurchaseServiceImpl implements PurchaseService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 使用Redis处理高并发
+     */
+    @Override
+    public boolean purchaseRedis(Long userId, Long productId, int quantity) {
+        Long purchaseTime = System.currentTimeMillis();
+        Jedis jedis = null;
+
+        try {
+            // 获取Jedis原始连接
+            jedis = (Jedis) stringRedisTemplate.getConnectionFactory().getConnection().getNativeConnection();
+            // 如果该脚本没有被加载过，则先将脚本加载到Redis服务器中，让其返回sha1编码
+            if (sha1 == null) {
+                sha1 = jedis.scriptLoad(PURCHASE_LUA_SCRIPT);
+                System.out.println(PURCHASE_LUA_SCRIPT);
+            }
+
+            // 执行脚本并返回结果
+            Object object = jedis.evalsha(sha1,
+                    2,
+                    PRODUCT_SCHEDULE_SET,
+                    PURCHASE_PRODUCT_LIST_PREFIX,
+                    userId + "",
+                    productId + "",
+                    quantity + "",
+                    purchaseTime + "");
+            Long result = (Long) object;
+            return result == 1;
+        } finally {
+            // 关闭jedis连接
+            if (jedis != null && jedis.isConnected()) {
+                jedis.close();
+            }
+        }
+
+    }
+
+    /**
+     * 保存购买记录方法
+     * 保存记录启用了数据库事务，并将传播行为设置为REQUEST_NEW，即调用它会将当前事务挂起，开启新的事务
+     * 这样在回滚时只会回滚这个方法内部的事务，而不会影响全局事务
+     *
+     * @param records 购买记录
+     * @return true
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public boolean dealRedisPurchase(List<PurchaseRecordPO> records) {
+        for (PurchaseRecordPO record : records) {
+            purchaseRecordMapper.insertPurchaseRecord(record);
+            productMapper.decreaseProduct(record.getProductId(), record.getQuantity());
+        }
+        return true;
     }
 
 

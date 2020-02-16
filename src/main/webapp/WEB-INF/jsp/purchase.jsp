@@ -53,11 +53,77 @@
                         productId: productId,
                         quantity: 1
                     };
+                    $.post("./start", params, function(result) {
+                        // alert(result.msgInfo);
+                    });
+                }
+            });
+
+            $("#submitWithCAS").click(function () {
+                var userId = $("#userId1").val();
+                var productId = $("#productId1").val();
+
+                for(var i = 1; i <= 2000; i++) {
+                    var params = {
+                        userId: userId,
+                        productId: productId,
+                        quantity: 1
+                    };
+                    $.post("./startCAS", params, function(result) {
+                        // alert(result.msgInfo);
+                    });
+                }
+            });
+
+            $("#submitWithCASTime").click(function () {
+                var userId = $("#userId1").val();
+                var productId = $("#productId1").val();
+
+                for(var i = 1; i <= 2000; i++) {
+                    var params = {
+                        userId: userId,
+                        productId: productId,
+                        quantity: 1
+                    };
+                    $.post("./startCASWithTime", params, function(result) {
+                        // alert(result.msgInfo);
+                    });
+                }
+            });
+
+            $("#submitWithCASCount").click(function () {
+                var userId = $("#userId1").val();
+                var productId = $("#productId1").val();
+
+                for(var i = 1; i <= 2000; i++) {
+                    var params = {
+                        userId: userId,
+                        productId: productId,
+                        quantity: 1
+                    };
                     $.post("./startCASWithCount", params, function(result) {
                         // alert(result.msgInfo);
                     });
                 }
             });
+
+            $("#submitWitRedis").click(function () {
+                var userId = $("#userId1").val();
+                var productId = $("#productId1").val();
+
+                for(var i = 1; i <= 2000; i++) {
+                    var params = {
+                        userId: userId,
+                        productId: productId,
+                        quantity: 1
+                    };
+                    $.post("./startWithRedis", params, function(result) {
+                        // alert(result.msgInfo);
+                    });
+                }
+            });
+
+
         })
     </script>
 </head>
@@ -86,7 +152,7 @@
                 <button id="submit" name="submit">普通购买商品</button>
             </td>
             <td>
-                注：可以输入商品熟练进行购买。
+                注：可以输入商品数量进行购买。
             </td>
         </tr>
     </table>
@@ -105,10 +171,42 @@
         </tr>
         <tr>
             <td>
-                <button id="submit1" name="submit1">开始抢购商品</button>
+                <button id="submit1" name="submit1">开始抢购商品(MYSQL行锁方式)</button>
             </td>
             <td>
                 注：默认2000人抢购1000个商品，每人限买1个商品。(根据数据库所在服务器性能进行调整)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="submitWithCAS" name="submit1">开始抢购商品(CAS)</button>
+            </td>
+            <td>
+                注：CAS方式进行商品抢购，使用version避免ABA问题
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="submitWithCASTime" name="submit1">开始抢购商品(CAS时间戳重入限制)</button>
+            </td>
+            <td>
+                注：CAS方式进行商品抢购，并使用时间戳限制重入时间间隔
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="submitWithCASCount" name="submit1">开始抢购商品(CAS次数重入限制)</button>
+            </td>
+            <td>
+                注：CAS方式进行商品抢购，并使用计数方式限制重入次数
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="submitWitRedis" name="submit1">开始抢购商品(Redis)</button>
+            </td>
+            <td>
+                注：使用Redis方式实现高并发下的商品抢购，抢购记录先暂时保存在Redis，后通过定时任务同步至MySQL
             </td>
         </tr>
     </table>

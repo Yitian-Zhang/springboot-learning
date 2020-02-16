@@ -1,5 +1,9 @@
 package cn.zyt.springbootlearning.service;
 
+import cn.zyt.springbootlearning.domain.business.PurchaseRecordPO;
+
+import java.util.List;
+
 public interface PurchaseService {
 
     /**
@@ -16,4 +20,8 @@ public interface PurchaseService {
     boolean purchaseCASWithTime(Long userId, Long productId, int quantity);
 
     boolean purchaseCASWithCount(Long userId, Long productId, int quantity);
+
+    boolean purchaseRedis(Long userId, Long productId, int quantity);
+
+    boolean dealRedisPurchase(List<PurchaseRecordPO> records);
 }
