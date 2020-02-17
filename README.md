@@ -542,7 +542,7 @@ select min(purchase_time), max(purchase_time) from tb_purchase_record where prod
 # 相应的service方法
 cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl#purchase
 ```
-使用product_id=3来进行测试，stock=-1。MySQL行锁失效，暂时未找到原因。
+使用product_id=3来进行测试，stock=0。性能32s。
 
 2.使用乐观锁(CAS)模式
 使用product_id=4来进行测试，存在200多个stock没有被消费，性能：41s
@@ -568,4 +568,18 @@ cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl#purchaseCASWithCount
 ```
 
 4.使用Redis来处理大量并发情况
-使用product_id=7进行测试
+使用product_id=7进行测试，stock消费正常，性能：2136ms。
+```
+# 相应的方法
+cn.zyt.springbootlearning.service.impl.PurchaseServiceImpl#purchaseWithRedis
+# 数据库同步方法
+cn.zyt.springbootlearning.service.scheduling.PurchaseScheduleService
+```
+
+### 主要的数据库表SQL
+1. t_user
+
+2. tb_product
+
+3. tb_purchase_record
+

@@ -52,4 +52,12 @@ public class PurchaseController {
         String msg = success ? "抢购成功" : "抢购失败";
         return new CommonResult(success, msg);
     }
+
+    @RequestMapping("/startWithRedis")
+    @ResponseBody
+    public CommonResult startWithRedis(Long userId, Long productId, Integer quantity) {
+        boolean success = purchaseService.purchaseRedis(userId, productId, quantity);
+        String msg = success ? "抢购成功" : "抢购失败";
+        return new CommonResult(success, msg);
+    }
 }
