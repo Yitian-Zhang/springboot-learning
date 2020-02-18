@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class StringToUserConverter implements Converter<String, User> {
+
     @Override
     public User convert(String userStr) {
         String[] strArr = userStr.split("-");

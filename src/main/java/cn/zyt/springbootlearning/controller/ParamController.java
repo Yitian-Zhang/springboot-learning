@@ -92,6 +92,7 @@ public class ParamController {
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("date", date);
         dataMap.put("number", number);
+        System.out.println(dataMap);
         return dataMap;
     }
 
