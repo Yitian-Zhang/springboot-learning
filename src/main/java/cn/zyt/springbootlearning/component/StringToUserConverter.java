@@ -15,11 +15,23 @@ public class StringToUserConverter implements Converter<String, User> {
 
     @Override
     public User convert(String userStr) {
-        String[] strArr = userStr.split("-");
-        String userName = strArr[0];
-        Integer sex = Integer.parseInt(strArr[1]);
-        String note = strArr[2];
+        String userName = null;
+        Integer sex = null;
+        String note = null;
 
+        String[] strArr = userStr.split("-");
+        if (strArr.length == 3) {
+            userName = strArr[0];
+            if (!strArr[1].equals("")) {
+                sex = Integer.parseInt(strArr[1]);
+            }
+            note = strArr[2];
+        } else if (strArr.length == 2) {
+            userName = strArr[0];
+            if (!strArr[1].equals("")) {
+                sex = Integer.parseInt(strArr[1]);
+            }
+        }
         User user = new User(userName, sex, note);
         return user;
     }

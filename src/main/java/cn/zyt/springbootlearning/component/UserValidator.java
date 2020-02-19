@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
+ * 自定义参数验证器
  * @author yitian
  */
 public class UserValidator implements Validator {
@@ -28,7 +29,7 @@ public class UserValidator implements Validator {
         }
         User user = (User) o;
         if (StringUtils.isEmpty(user.getUserName())) {
-            errors.rejectValue("userName", null, "用户名不能为空");
+            errors.rejectValue("userName", null, "userName不能为空");
         }
     }
 }

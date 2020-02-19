@@ -73,6 +73,8 @@
                     参数校验页面: /param/valid/page</a><br>
                 <a href="http://localhost:8080/param/valid/user-validator?user=-1-note1&date=2020-02-01">
                     自定义参数校验页面: /param/valid/user-validator?user=-1-note1&date=2020-02-01</a><br>
+                <a href="http://localhost:8080/param/valid/user?user=username-1-">
+                    自定义参数校验页面: /param/valid/user?user=username-1-</a><br>
             </td>
         </tr>
         <tr>

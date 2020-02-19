@@ -14,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -158,7 +159,8 @@ public class ParamController {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         // 绑定config package中定义的用户验证器
-        binder.setValidator(new UserValidator());
+//        binder.setValidator(new UserValidator());
+        binder.addValidators(new UserValidator());
         // 定义日期参数格式，参数不在需要注解@DateTimeFormat, boolean参数表示是否允许为空
         binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), false));
@@ -191,5 +193,24 @@ public class ParamController {
             }
         }
         return map;
+    }
+
+    @RequestMapping("/valid/user")
+    @ResponseBody
+    public Map<String, Object> validator(@Valid User user, Errors errors) {
+        Map<String, Object> resultMap = new HashMap<>();
+
+        if (errors.hasErrors()) {
+            List<ObjectError> oes = errors.getAllErrors();
+            for (ObjectError error : oes) {
+                if (error instanceof FieldError) {
+                    FieldError fe = (FieldError) error;
+                    resultMap.put(fe.getField(), fe.getDefaultMessage());
+                } else {
+                    resultMap.put(error.getObjectName(), error.getDefaultMessage());
+                }
+            }
+        }
+        return resultMap;
     }
 }
