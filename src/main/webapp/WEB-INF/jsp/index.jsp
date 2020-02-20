@@ -198,6 +198,21 @@
 
         <tr>
             <td>
+                Spring数据库事务：
+            </td>
+            <td>
+                <hr/>
+                <a href="http://localhost:8080/user/getUser?id=1">
+                    获取用户（观察DEBUG级别日志）：/user/getUser?id=1</a><br>
+                <a href="http://localhost:8080/user/insertUser?userName=tname&sex=1&note=none">
+                    插入用户（观察DEBUG级别日志）：/user/insertUser?userName=tname&sex=1&note=none</a><br>
+                <a href="http://localhost:8080/user/insertUsers?userName1=tname1&sex1=1&note1=none&userName2=tname2&sex2=1&note2=none">
+                    批量插入用户（观察DEBUG级别日志）：/user/insertUsers?userName1=tname1&sex1=1&note1=none&userName2=tname2&sex2=1&note2=none</a><br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
                 Spring项目监测：
             </td>
             <td>

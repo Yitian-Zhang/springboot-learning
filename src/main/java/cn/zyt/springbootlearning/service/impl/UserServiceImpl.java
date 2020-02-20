@@ -6,6 +6,7 @@ import cn.zyt.springbootlearning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
      * 使用数据库事务
      */
     @Override
-    @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 1)
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, timeout = 1)
     public int insertUser(User user) {
         return userMapper.insertUser(user);
     }
