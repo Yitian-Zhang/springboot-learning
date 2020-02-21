@@ -1,6 +1,7 @@
 package cn.zyt.springbootlearning.ioc;
 
 import cn.zyt.springbootlearning.ioc.config.AppConfig;
+import cn.zyt.springbootlearning.ioc.config.ScopeBean;
 import cn.zyt.springbootlearning.ioc.config.UserBean;
 import cn.zyt.springbootlearning.ioc.injection.BusinessPerson;
 import cn.zyt.springbootlearning.ioc.injection.Person;
@@ -11,12 +12,19 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.sql.DataSource;
+import java.sql.SQLException;
+
 public class IoCTest {
 
     private static Logger logger = LoggerFactory.getLogger(IoCTest.class);
 
-    public static void main(String[] args) {
-
+    /**
+     * 测试Profile注解
+     */
+    public static void main(String[] args) throws SQLException {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        context.getBean(DataSource.class);
     }
 
     @Test
@@ -37,5 +45,13 @@ public class IoCTest {
     public void beanLifecycleTest() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         context.close();
+    }
+
+    @Test
+    public void beanScopeTest() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ScopeBean scopeBean = context.getBean(ScopeBean.class);
+        ScopeBean scopeBean1 = context.getBean(ScopeBean.class);
+        System.out.println(scopeBean == scopeBean1);
     }
 }

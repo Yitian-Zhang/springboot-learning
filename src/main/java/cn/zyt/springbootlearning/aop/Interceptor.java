@@ -22,9 +22,7 @@ public interface Interceptor {
     /**
      * 取代原有事件方法
      * @param invocation 回调参数，使用invocation的proceed方法，回调原有事件
-     * @return 原有事件返回对象
-     * @throws InvocationTargetException 异常
-     * @throws IllegalAccessException 异常
+     * @return           原有事件返回对象
      */
     Object around(Invocation invocation) throws InvocationTargetException, IllegalAccessException;
 
@@ -39,7 +37,7 @@ public interface Interceptor {
     void afterThrowing();
 
     /**
-     * 是否使用around方法取代原有方法标识
+     * 是否使用around方法取代原有方法的标识
      */
     boolean useAround();
 }

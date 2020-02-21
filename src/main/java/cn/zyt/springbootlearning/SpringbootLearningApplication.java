@@ -7,10 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 
 @SpringBootApplication(scanBasePackages = {"cn.zyt.springbootlearning.*"})
 @MapperScan(basePackages = "cn.zyt.springbootlearning.*", annotationClass = Repository.class)
+//@PropertySource(value = {"classpath:jdbc.properties"}, ignoreResourceNotFound = true)
 public class SpringbootLearningApplication {
 
     private static Logger logger = LoggerFactory.getLogger(SpringbootLearningApplication.class);

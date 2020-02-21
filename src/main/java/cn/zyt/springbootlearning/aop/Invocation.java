@@ -21,8 +21,6 @@ public class Invocation {
     /**
      * 以反射的形式调用原有方法
      * @return 方法调用结果
-     * @throws InvocationTargetException 异常
-     * @throws IllegalAccessException 异常
      */
     public Object proceed() throws InvocationTargetException, IllegalAccessException {
         return method.invoke(target, params);
