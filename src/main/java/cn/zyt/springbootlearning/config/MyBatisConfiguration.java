@@ -12,11 +12,6 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class MyBatisConfiguration {
 
-//    @Bean(name = "myAspect")
-//    public MyAspect initMyAspect() {
-//        return new MyAspect();
-//    }
-
     @Autowired
     PlatformTransactionManager transactionManager;
 

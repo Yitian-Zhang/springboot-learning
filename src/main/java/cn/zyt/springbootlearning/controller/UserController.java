@@ -34,7 +34,7 @@ public class UserController {
 
     @RequestMapping("/checkandprint")
     @ResponseBody
-    public User checkAndPirntUser(Long id, String username, int sex, String note) {
+    public User checkAndPrintUser(Long id, String username, int sex, String note) {
         User user = new User(id, username, sex, note);
         UserValidator userValidator = (UserValidator) userService;
         if (userValidator.validate(user)) {

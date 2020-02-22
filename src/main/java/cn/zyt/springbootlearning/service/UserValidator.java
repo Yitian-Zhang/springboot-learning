@@ -3,7 +3,7 @@ package cn.zyt.springbootlearning.service;
 import cn.zyt.springbootlearning.domain.User;
 
 /**
- * 为UserService接口额外引入的新接口
+ * AOP中为UserService接口额外引入的新接口
  */
 public interface UserValidator {
     /**

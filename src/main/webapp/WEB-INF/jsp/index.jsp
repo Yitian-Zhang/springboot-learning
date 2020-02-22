@@ -41,6 +41,19 @@
     <table style="border: #1e282c; background: white">
         <tr>
             <td>
+                Spring AOP测试：
+            </td>
+            <td>
+                <hr/>
+                <a href="http://localhost:8080/user/print?id=1&useName=yitian&sex=1&note=none">
+                    测试MyAspect：/user/print?id=1&useName=yitian&sex=1&note=none</a><br>
+                <a href="http://localhost:8080/user/checkandprint?id=1&useName=yitian&sex=1&note=none">
+                    使用@DeclareParents引入UserValidator接口：/user/checkandprint?id=1&useName=yitian&sex=1&note=none</a><br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
                 数据创建与显示页面：
             </td>
             <td>

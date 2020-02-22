@@ -3,7 +3,7 @@ package cn.zyt.springbootlearning.ioc.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class DatabaseProperties {
 
     @Value("${database.drivername}")

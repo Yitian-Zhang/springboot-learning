@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
- * 自定义参数验证器
+ * Spring中自定义参数验证器
  * @author yitian
  */
 public class UserValidator implements Validator {

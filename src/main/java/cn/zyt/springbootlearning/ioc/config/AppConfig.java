@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@Configuration
-@ComponentScan(value = "cn.zyt.springbootlearning.ioc.*",
-        excludeFilters = {@ComponentScan.Filter(classes = {Service.class})})
+//@Configuration
+//@ComponentScan(value = "cn.zyt.springbootlearning.ioc.*",
+//        excludeFilters = {@ComponentScan.Filter(classes = {Service.class})})
 public class AppConfig {
 //    @Bean(name = "UserBean")
 //    public UserBean getInit() {

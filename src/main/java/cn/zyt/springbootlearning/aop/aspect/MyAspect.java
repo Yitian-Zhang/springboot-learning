@@ -18,8 +18,7 @@ public class MyAspect {
     /**
      * 为UserService接口引入UserValidator接口
      */
-    @DeclareParents(value = "cn.zyt.springbootlearning.service.impl.UserServiceImpl+",
-    defaultImpl = UserValidatorImpl.class)
+    @DeclareParents(value = "cn.zyt.springbootlearning.service.impl.UserServiceImpl", defaultImpl = UserValidatorImpl.class)
     public UserValidator userValidator;
 
     @Pointcut("execution(* cn.zyt.springbootlearning.service.impl.UserServiceImpl.printUser(..))")
@@ -65,6 +64,6 @@ public class MyAspect {
     @Before("pointCut() && args(user)")
     public void beforeParam(JoinPoint joinPoint, User user) {
         Object[] args = joinPoint.getArgs();
-        System.out.println("before ... and get args: " + args);
+        System.out.println("before ... ");
     }
 }
