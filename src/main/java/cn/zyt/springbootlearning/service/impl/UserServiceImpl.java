@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
         System.out.println(user);
     }
 
+    @Override
+    public void manyAspects() {
+        System.out.println("测试多个Aspect的运行顺序");
+    }
+
     /**
      * 使用数据库事务
      */

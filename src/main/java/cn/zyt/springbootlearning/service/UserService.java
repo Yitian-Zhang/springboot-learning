@@ -12,6 +12,11 @@ public interface UserService {
      */
     void printUser(User user);
 
+    /**
+     * AOP多个切面测试
+     */
+    void manyAspects();
+
     User getUserById(Long id);
 
     void addUser(User user);

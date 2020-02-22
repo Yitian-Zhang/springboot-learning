@@ -24,6 +24,9 @@ public class UserController {
     @Autowired
     private UserBatchService userBatchService;
 
+    /**
+     * AOP测试
+     */
     @RequestMapping("/print")
     @ResponseBody
     public User printUser(Long id, String username, int sex, String note) {
@@ -32,6 +35,9 @@ public class UserController {
         return user;
     }
 
+    /**
+     * AOP测试
+     */
     @RequestMapping("/checkandprint")
     @ResponseBody
     public User checkAndPrintUser(Long id, String username, int sex, String note) {
@@ -41,6 +47,14 @@ public class UserController {
             userService.printUser(user);
         }
         return user;
+    }
+
+    /**
+     * AOP测试
+     */
+    @RequestMapping("/manyAspects")
+    public void manyAspects() {
+        userService.manyAspects();
     }
 
     @RequestMapping("/getUserById")

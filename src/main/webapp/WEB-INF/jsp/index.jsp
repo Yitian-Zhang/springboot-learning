@@ -49,6 +49,8 @@
                     测试MyAspect：/user/print?id=1&useName=yitian&sex=1&note=none</a><br>
                 <a href="http://localhost:8080/user/checkandprint?id=1&useName=yitian&sex=1&note=none">
                     使用@DeclareParents引入UserValidator接口：/user/checkandprint?id=1&useName=yitian&sex=1&note=none</a><br>
+                <a href="http://localhost:8080/user/manyAspects">
+                    多个切面运行测试：/user/manyAspects</a><br>
             </td>
         </tr>
 
