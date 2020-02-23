@@ -454,6 +454,16 @@ WEB-INF/jsp/index.jsp
 # 自定义缓存管理器
 cn.zyt.springbootlearning.config.SpringRedisConfiguration
 ```
+23.Spring IoC理解
+```
+# 该包下代码
+cn.zyt.springbootlearning.ioc.*
+```
+24.Spring AOP理解
+从约定编程的角度理解Spring AOP
+```
+cn.zyt.springbootlearning.aop
+```
 
 ### 项目中包含的商品抢购实例
 
@@ -578,8 +588,38 @@ cn.zyt.springbootlearning.service.scheduling.PurchaseScheduleService
 
 ### 主要的数据库表SQL
 1. t_user
-
+```sql
+create table t_user (
+	id int(12) not null auto_increment,
+	user_name varchar(60) not null,
+	sex int(3) not null default 1 check (sex in(1,2)),
+	note varchar(256) null,
+	primary key(id)
+);
+```
 2. tb_product
-
+```sql
+create table tb_product (
+	id int(12) not null auto_increment comment '编号',
+	product_name varchar(60) not null comment '产品名称',
+	stock int(10) not null comment '库存',
+	price decimal(16,2) not null comment '单价',
+	version int(10) not null default 0 comment '版本号',
+	note varchar(256) null comment '备注',
+	primary key (id)
+);
+```
 3. tb_purchase_record
-
+```sql
+create table tb_purchase_record (
+	id int(12) not null auto_increment comment '编号',
+	user_id int(12) not null comment '用户编号',
+	product_id int(12) not null comment '产品编号',
+	price decimal(16,2) not null comment '价格',
+	quantity int(12) not null comment '数量',
+	total_price decimal(16,2) not null comment '总价',
+	purchase_time timestamp not null default now() comment '购买日期',
+	note varchar(512) null comment '备注',
+	primary key (id)
+);
+```
