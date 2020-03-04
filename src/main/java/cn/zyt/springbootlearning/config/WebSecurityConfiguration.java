@@ -41,6 +41,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // 根据Endpoint这是访问权限
 //        setEndpointAuthorize(http);
+
+        // 禁用CSRF
+        disableCsrf(http);
     }
 
     private void setDefaultAuthorize(HttpSecurity http) throws Exception {

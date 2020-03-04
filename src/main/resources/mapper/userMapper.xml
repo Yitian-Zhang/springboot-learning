@@ -15,7 +15,7 @@
     </insert>
 
     <select id="getUserList" resultType="cn.zyt.springbootlearning.domain.User">
-        select * from t_user
+        select * from t_user order by id ASC
     </select>
 
     <select id="searchUser" resultType="cn.zyt.springbootlearning.domain.User">
