@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 /**
  * 使用Spring Security配置Actuator端点的访问用户和权限
@@ -41,6 +42,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // 根据Endpoint这是访问权限
 //        setEndpointAuthorize(http);
+
+        // JSP不用开启这类的启用
+        // React axios请求开启CSRF验证
+//        enableCsrfForReact(http);
 
         // 禁用CSRF
         disableCsrf(http);
@@ -90,6 +95,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/logoutResult"); // 这里的响应controller位于WebSecurityConfiguration
     }
 
+    /**
+     * 为React中使用axios POST请求开启CSRF的配置
+     * 已解决，直接使用即可
+     */
+    private void enableCsrfForReact(HttpSecurity http) throws Exception {
+        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+    }
+
+    /**
+     * 禁用CSRF
+     */
     private void disableCsrf(HttpSecurity http) throws Exception {
         http.csrf().disable();
     }

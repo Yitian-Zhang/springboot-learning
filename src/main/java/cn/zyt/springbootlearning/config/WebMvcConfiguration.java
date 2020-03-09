@@ -91,7 +91,18 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*");
+//                registry.addMapping("/**").allowedOrigins("*");
+
+                // 更新spring boot跨域设置
+                registry.addMapping("/**")
+                        //设置允许跨域请求的域名
+                        .allowedOrigins("*")
+                        //是否允许证书 不再默认开启（在跨域情况下使用cookie时开启，需要axios开启该对应的选项）
+                        .allowCredentials(true)
+                        //设置允许的方法
+                        .allowedMethods("*")
+                        //跨域允许时间
+                        .maxAge(3600);
             }
         };
     }
