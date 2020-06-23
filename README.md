@@ -19,6 +19,10 @@
 因此使用在application.properties配置文件进行设置的方式，如果MyBatis的配置复杂，
 则可以在application.properties文中指定mybatis-config.xml配置文件的目录并在该文件中进行MyBatis的详细配置。
 
+### 项目运行
+直接运行SpringbootLearningApplication.java启动类即可。<br>
+***注意***：如果出现Jedis或者MySQL连接异常，请根据个人具体情况，修改Redis和MySQL连接URL。
+
 ### 该项目的整体结构（更新中）
 ```$xslt
 .
