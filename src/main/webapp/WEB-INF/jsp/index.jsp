@@ -292,9 +292,13 @@
             </td>
         </tr>
         <tr>
-            <td></td>
+            <td>补充：控制器通知</td>
             <td>
                 <hr/>
+                <a href="http://localhost:8080/advice/test">
+                    控制器通知测试：/advice/test</a><br/>
+                <a href="http://localhost:8080/advice/test?date=2020-06-24">
+                    控制器通知测试：/advice/test?date=2020-06-24</a><br/>
             </td>
         </tr>
     </table>
